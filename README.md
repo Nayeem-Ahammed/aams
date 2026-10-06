@@ -1,2 +1,2 @@
-# aams
-# aams
+# Automated Admission Management System
+
