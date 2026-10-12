@@ -1,13 +1,1055 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AAMS Day-4 FF</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AAMS - Automated Admission Management System</title>
+  <meta name="description" content="Automated Admission Management System (AAMS) portal with real-time board verification, AI photo screening, multi-role dashboard, and instant admit card generation.">
+  <meta property="og:title" content="AAMS - Automated Admission Management System">
+  <meta property="og:description" content="Automated Admission Management System (AAMS) portal with real-time board verification, AI photo screening, multi-role dashboard, and instant admit card generation.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Hello....</h1>
+
+  <!-- ======================================================================
+       SECTION 0: NAVBAR (STICKY, TAB TRIGGERS, ROLE STATUS & PROFILE)
+       ====================================================================== -->
+  <header id="section-0" class="navbar-sticky">
+    <div class="container nav-container">
+      <!-- Brand Crest & Title -->
+      <div class="brand-link" onclick="navigateToSection('section-1')">
+        <img src="AAMS Crest.png" alt="AAMS Crest" class="brand-crest">
+        <div class="brand-text-col">
+          <span class="brand-title">AAMS Portal</span>
+          <span class="brand-subtitle">Automated Admission Management System</span>
+        </div>
+      </div>
+
+      <!-- Desktop Nav Tabs -->
+      <nav class="nav-links-desktop" aria-label="Main Navigation">
+        <button class="nav-btn active" data-target="section-1" onclick="navigateToSection('section-1')">Home</button>
+        <button class="nav-btn" data-target="section-2" onclick="navigateToSection('section-2')">Dashboard</button>
+        <button class="nav-btn" data-target="section-3" onclick="navigateToSection('section-3')">Notices</button>
+        <button class="nav-btn" data-target="section-4" onclick="navigateToSection('section-4')">Guidelines</button>
+        <button class="nav-btn" data-target="section-5" onclick="navigateToSection('section-5')">Application Form</button>
+        <button class="nav-btn" data-target="section-6" onclick="navigateToSection('section-6')">Helpline & QNA</button>
+        <button class="nav-btn" data-target="section-7" onclick="navigateToSection('section-7')">Login / Profile</button>
+      </nav>
+
+      <!-- Actions & Role Status -->
+      <div class="nav-actions">
+        <div class="role-badge" onclick="navigateToSection('section-2')" title="Current Mode">
+          <span id="activeRoleDot" class="role-dot"></span>
+          <span id="activeRoleText">Applicant View</span>
+        </div>
+        <button class="btn-primary-sm" onclick="navigateToSection('section-5')">Apply Now →</button>
+        <button class="hamburger-btn" onclick="toggleMobileDrawer()" aria-label="Toggle Navigation">☰</button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobileDrawer" class="mobile-drawer">
+      <div class="mobile-nav-list">
+        <button class="nav-btn" data-target="section-1" onclick="navigateToSection('section-1')">Home</button>
+        <button class="nav-btn" data-target="section-2" onclick="navigateToSection('section-2')">Dashboard</button>
+        <button class="nav-btn" data-target="section-3" onclick="navigateToSection('section-3')">Notices</button>
+        <button class="nav-btn" data-target="section-4" onclick="navigateToSection('section-4')">Guidelines & Eligibility</button>
+        <button class="nav-btn" data-target="section-5" onclick="navigateToSection('section-5')">Application Wizard</button>
+        <button class="nav-btn" data-target="section-6" onclick="navigateToSection('section-6')">Helpline & QNA</button>
+        <button class="nav-btn" data-target="section-7" onclick="navigateToSection('section-7')">Login & Registration</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER (SPA VISIBILITY CONTROL) -->
+  <main class="container" style="min-height: 80vh;">
+
+    <!-- ====================================================================
+         SECTION 1: HOME SECTION (ACTIVE BY DEFAULT)
+         ==================================================================== -->
+    <section id="section-1" class="spa-section active">
+      <!-- Hero Banner -->
+      <div class="hero-card">
+        <img src="/src/assets/images/hero_academic_campus_1791455246399.jpg" alt="University Quadrangle" class="hero-bg-img">
+        <div class="hero-overlay-scrim"></div>
+        <div class="hero-content">
+          <span class="badge-tag">Academic Session 2026–2027 Admission</span>
+          <h1 class="hero-title">Automated Admission Management System</h1>
+          <p class="hero-lead">
+            Experience real-time national education board verification, AI biometric photo compliance, automated quota validation, and instant examination admit card generation.
+          </p>
+          <div class="hero-btn-row">
+            <button class="btn-primary" onclick="navigateToSection('section-5')">Apply Online (4-Step Wizard) →</button>
+            <button class="btn-outline-white" onclick="navigateToSection('section-4')">Check Eligibility & Guidelines</button>
+            <button class="btn-outline-white" onclick="navigateToSection('section-2')">View Student Dashboard</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Announcements Strip -->
+      <div class="announcement-banner">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <span style="font-size: 1.25rem;">📢</span>
+          <div>
+            <span style="font-size: 0.75rem; font-weight: 800; color: #92400e; text-transform: uppercase;">Latest Urgent Notice:</span>
+            <p style="font-size: 0.8125rem; font-weight: 600; color: #1e293b;">Online registration window for Undergraduate Admission Fall 2026 is open until Nov 15, 2026.</p>
+          </div>
+        </div>
+        <button onclick="navigateToSection('section-3')" style="background: none; border: none; color: #1e3a8a; font-weight: 700; font-size: 0.75rem; cursor: pointer; text-decoration: underline;">
+          View All Circulars →
+        </button>
+      </div>
+
+      <!-- Key Admission Steps (4 Cards) -->
+      <div style="margin-bottom: 2.5rem;">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+          <span style="font-size: 0.75rem; font-weight: 700; color: var(--secondary); text-transform: uppercase;">Paperless Process</span>
+          <h2 style="font-size: 1.75rem; font-weight: 800; color: var(--text-main);">Four Simple Admission Steps</h2>
+        </div>
+        <div class="step-grid">
+          <div class="step-card">
+            <div>
+              <div class="step-num">01</div>
+              <h3>Online Registration & Board Match</h3>
+              <p>Enter SSC & HSC Roll, Registration, and Board. Scores and GPAs are auto-verified in real time against national databases.</p>
+            </div>
+            <div style="margin-top: 1rem; font-size: 0.6875rem; font-weight: 700; color: var(--primary);">Instant Verification</div>
+          </div>
+          <div class="step-card">
+            <div>
+              <div class="step-num">02</div>
+              <h3>Program & Language Selection</h3>
+              <p>Choose your preferred examination units (Unit A, B, C, D) and rank departments by career priority in English or Bengali.</p>
+            </div>
+            <div style="margin-top: 1rem; font-size: 0.6875rem; font-weight: 700; color: var(--primary);">Custom Curriculum</div>
+          </div>
+          <div class="step-card">
+            <div>
+              <div class="step-num">03</div>
+              <h3>AI Photo & Selfie Screening</h3>
+              <p>Upload passport photo and live selfie. Neural models detect single face presence, 300x300 aspect ratio, and neutral lighting.</p>
+            </div>
+            <div style="margin-top: 1rem; font-size: 0.6875rem; font-weight: 700; color: var(--secondary);">Biometric Compliance</div>
+          </div>
+          <div class="step-card">
+            <div>
+              <div class="step-num">04</div>
+              <h3>Admit Card Issuance & Test</h3>
+              <p>Download your official QR/barcode admit card with allocated examination hall, room number, and instructions.</p>
+            </div>
+            <div style="margin-top: 1rem; font-size: 0.6875rem; font-weight: 700; color: var(--primary);">Print Ready PDF</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Portal Statistics Strip -->
+      <div class="stats-card">
+        <div>
+          <div class="stat-value">3,250</div>
+          <div class="stat-label">Total Undergraduate Seats</div>
+        </div>
+        <div>
+          <div class="stat-value">28</div>
+          <div class="stat-label">Specialized Departments</div>
+        </div>
+        <div>
+          <div class="stat-value">99.8%</div>
+          <div class="stat-label">AI Photo Match Rate</div>
+        </div>
+        <div>
+          <div class="stat-value">0 sec</div>
+          <div class="stat-label">Instant Board Matching</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION 2: DASHBOARD SECTION (MULTI-ROLE: APPLICANT, ADMIN, AI CHECK)
+         ==================================================================== -->
+    <section id="section-2" class="spa-section">
+      <!-- Role Switcher Segmented Bar -->
+      <div class="role-switcher-bar">
+        <div>
+          <span style="font-size: 0.6875rem; font-weight: 800; color: #64748b; text-transform: uppercase;">Workspace Role Preview</span>
+          <h2 style="font-size: 1.25rem; font-weight: 800; color: #0f172a;">Admission System Dashboard</h2>
+        </div>
+        <div class="segmented-control">
+          <button id="segRoleApplicant" class="seg-btn active" onclick="switchRole('applicant')">Applicant View</button>
+          <button id="segRoleAdmin" class="seg-btn" onclick="switchRole('admin')">Admin View</button>
+        </div>
+      </div>
+
+      <!-- APPLICANT VIEW -->
+      <div id="applicantDashboardView">
+        <!-- Profile Card -->
+        <div class="card">
+          <div class="profile-top-row">
+            <div style="display: flex; gap: 1rem; align-items: flex-start;">
+              <div class="avatar-wrapper">
+                <img src="/src/assets/images/university_crest_emblem_1791455258427.jpg" alt="Student" class="avatar-img">
+                <span class="badge-ai-pass">AI VERIFIED</span>
+              </div>
+              <div>
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                  <h3 id="dashApplicantName" style="font-size: 1.25rem; font-weight: 800; color: #0f172a;">Sarah Rahman</h3>
+                  <span id="dashApplicantId" class="role-badge" style="font-family: monospace;">AAMS-2026-88412</span>
+                </div>
+                <p style="font-size: 0.75rem; color: #64748b; margin-top: 2px;">
+                  Units: <strong>Unit A (Science & Engineering), Unit D (Interdisciplinary)</strong>
+                </p>
+                <p style="font-size: 0.75rem; color: #64748b;">
+                  Quota Claim: <strong>General Merit (No Quota)</strong> · Payment: <strong style="color: #059669;">PAID (Ref: TXN-AAMS-9938217)</strong>
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <button id="btnDownloadAdmitCard" class="btn-primary" onclick="openAdmitCardModal()">
+                🖨️ Download Admit Card (PDF)
+              </button>
+            </div>
+          </div>
+
+          <!-- Academic Scores Row -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.75rem;">
+            <div style="background: #f8fafc; padding: 0.75rem; border-radius: var(--radius-sm);">
+              <span style="color: #64748b; display: block;">HSC Roll / Board</span>
+              <strong style="font-family: monospace; font-size: 0.875rem;">518423 (Dhaka Board · 2026)</strong>
+            </div>
+            <div style="background: #f8fafc; padding: 0.75rem; border-radius: var(--radius-sm);">
+              <span style="color: #64748b; display: block;">HSC Result GPA</span>
+              <strong style="font-family: monospace; font-size: 1rem; color: #059669;">5.00 / 5.00</strong>
+            </div>
+            <div style="background: #f8fafc; padding: 0.75rem; border-radius: var(--radius-sm);">
+              <span style="color: #64748b; display: block;">SSC Roll / Board</span>
+              <strong style="font-family: monospace; font-size: 0.875rem;">214589 (Dhaka Board · 2024)</strong>
+            </div>
+            <div style="background: #f8fafc; padding: 0.75rem; border-radius: var(--radius-sm);">
+              <span style="color: #64748b; display: block;">SSC Result GPA</span>
+              <strong style="font-family: monospace; font-size: 1rem; color: #059669;">5.00 / 5.00</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Application Progress Tracker Stepper -->
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
+            <div>
+              <h3 style="font-size: 1rem; font-weight: 800; color: #0f172a;">Application Progress Tracker</h3>
+              <p style="font-size: 0.75rem; color: #64748b;">Live status transitions across screening milestones</p>
+            </div>
+            <div style="display: flex; gap: 0.35rem;">
+              <button onclick="setApplicationStatus('draft')" style="padding: 2px 6px; font-size: 0.6875rem; border: 1px solid var(--border); background: #fff; cursor: pointer; border-radius: 4px;">Set Draft</button>
+              <button onclick="setApplicationStatus('submitted')" style="padding: 2px 6px; font-size: 0.6875rem; border: 1px solid var(--border); background: #fff; cursor: pointer; border-radius: 4px;">Set Submitted</button>
+              <button onclick="setApplicationStatus('under_review')" style="padding: 2px 6px; font-size: 0.6875rem; border: 1px solid var(--border); background: #fff; cursor: pointer; border-radius: 4px;">Set Review</button>
+              <button onclick="setApplicationStatus('accepted')" style="padding: 2px 6px; font-size: 0.6875rem; border: 1px solid var(--border); background: #ecfdf5; color: #059669; font-weight: 700; cursor: pointer; border-radius: 4px;">Set Accepted</button>
+            </div>
+          </div>
+
+          <div class="stepper-container">
+            <div id="step-draft" class="step-node completed">
+              <strong style="display: block; font-size: 0.8125rem;">1. Draft</strong>
+              <span style="font-size: 0.6875rem; color: #64748b;">Form initiated & personal data saved</span>
+            </div>
+            <div id="step-submitted" class="step-node completed">
+              <strong style="display: block; font-size: 0.8125rem;">2. Submitted</strong>
+              <span style="font-size: 0.6875rem; color: #64748b;">Board record matched & fee paid</span>
+            </div>
+            <div id="step-review" class="step-node completed">
+              <strong style="display: block; font-size: 0.8125rem;">3. Under Review</strong>
+              <span style="font-size: 0.6875rem; color: #64748b;">Quota & document verification</span>
+            </div>
+            <div id="step-accepted" class="step-node active-step">
+              <strong style="display: block; font-size: 0.8125rem;">4. Accepted</strong>
+              <span style="font-size: 0.6875rem; color: #64748b;">Admit Card issued & venue allocated</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Photo Verification Status Card -->
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+            <div>
+              <span style="font-size: 0.6875rem; font-weight: 700; color: #059669; text-transform: uppercase;">Biometric Neural Pipeline</span>
+              <h3 style="font-size: 1rem; font-weight: 800; color: #0f172a;">AI Facial Photo Verification Report</h3>
+            </div>
+            <div style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 0.35rem 0.75rem; border-radius: var(--radius-sm); font-size: 0.75rem; font-weight: 700; color: #059669;">
+              ✓ Human Face Detected (98.7% Confidence)
+            </div>
+          </div>
+
+          <div class="ai-telemetry-grid">
+            <div class="ai-metric-item">
+              <span style="display: block; font-size: 0.6875rem; color: #64748b;">Single Face Check</span>
+              <span>Passed (1 Face Only)</span>
+            </div>
+            <div class="ai-metric-item">
+              <span style="display: block; font-size: 0.6875rem; color: #64748b;">Neutral Background</span>
+              <span>Passed (99.1% White)</span>
+            </div>
+            <div class="ai-metric-item">
+              <span style="display: block; font-size: 0.6875rem; color: #64748b;">Resolution Check</span>
+              <span>Passed (600×600 px)</span>
+            </div>
+            <div class="ai-metric-item">
+              <span style="display: block; font-size: 0.6875rem; color: #64748b;">Frontal Eye Alignment</span>
+              <span>Passed (Yaw: 1.2°)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADMIN VIEW -->
+      <div id="adminDashboardView" style="display: none;">
+        <!-- Notice Creation Tool -->
+        <div class="card">
+          <div style="margin-bottom: 1rem;">
+            <h3 style="font-size: 1rem; font-weight: 800; color: #0f172a;">Notice Creation & Publishing Tool</h3>
+            <p style="font-size: 0.75rem; color: #64748b;">Publish instant circulars to Section 3 Notice Grid</p>
+          </div>
+
+          <form onsubmit="handleAdminNoticePublish(event)">
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label">Notice Title *</label>
+                <input type="text" id="adminNoticeTitle" class="form-control" required placeholder="e.g. Admit Card Download Guidelines for Unit A & B">
+              </div>
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label">Category *</label>
+                <select id="adminNoticeCategory" class="form-control">
+                  <option value="Admission">Admission</option>
+                  <option value="Examination">Examination</option>
+                  <option value="Merit List">Merit List</option>
+                  <option value="Quota">Quota</option>
+                  <option value="General">General</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Notice Content *</label>
+              <textarea id="adminNoticeContent" class="form-control" rows="3" required placeholder="Type the circular details and directives..."></textarea>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+              <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem;">
+                <label class="form-label" style="margin-bottom: 0;">Publish Date:</label>
+                <input type="date" id="adminNoticeDate" class="form-control" style="width: auto; padding: 0.35rem 0.65rem;" value="2026-10-08">
+              </div>
+              <button type="submit" class="btn-primary" style="padding: 0.5rem 1.25rem;">Publish Notice Now</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Active Notices Manager -->
+        <div class="card">
+          <h3 style="font-size: 1rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem;">Manage Published Notices</h3>
+          <div id="adminNoticeList"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION 3: NOTICE SECTION (SEARCHABLE & FILTERABLE GRID)
+         ==================================================================== -->
+    <section id="section-3" class="spa-section">
+      <div class="card">
+        <span style="font-size: 0.6875rem; font-weight: 700; color: var(--secondary); text-transform: uppercase;">Official Circulars Desk</span>
+        <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--text-main); margin-top: 0.25rem;">Admission Notices & Gazette Desk</h2>
+        <p style="font-size: 0.8125rem; color: #64748b; margin-top: 0.25rem;">
+          Search and inspect official administrative directives issued by the Central Admission Committee.
+        </p>
+
+        <!-- Filters & Search -->
+        <div class="notice-filter-bar" style="margin-top: 1.25rem;">
+          <div class="filter-pills">
+            <button class="pill-btn active" onclick="filterNotices('All')">All</button>
+            <button class="pill-btn" onclick="filterNotices('Admission')">Admission</button>
+            <button class="pill-btn" onclick="filterNotices('Examination')">Examination</button>
+            <button class="pill-btn" onclick="filterNotices('Merit List')">Merit List</button>
+            <button class="pill-btn" onclick="filterNotices('Quota')">Quota</button>
+          </div>
+          <input type="text" class="search-input" placeholder="Search notices by keyword..." oninput="searchNotices(this.value)">
+        </div>
+      </div>
+
+      <!-- Notice Cards Grid -->
+      <div id="noticeGridContainer" class="notice-grid"></div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION 4: GUIDELINE SECTION (SPECIFICATIONS & ELIGIBILITY CALCULATOR)
+         ==================================================================== -->
+    <section id="section-4" class="spa-section">
+      <div class="card">
+        <span style="font-size: 0.6875rem; font-weight: 700; color: var(--secondary); text-transform: uppercase;">Official Regulations</span>
+        <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--text-main); margin-top: 0.25rem;">Admission Guidelines & Document Specifications</h2>
+        <p style="font-size: 0.8125rem; color: #64748b; margin-top: 0.25rem;">
+          Review file specifications, faculty prerequisites, and test your eligibility using our automated calculator.
+        </p>
+      </div>
+
+      <!-- INTERACTIVE ELIGIBILITY CALCULATOR -->
+      <div class="calc-box">
+        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+          <span style="font-size: 1.5rem;">🧮</span>
+          <div>
+            <h3 style="font-size: 1.25rem; font-weight: 800;">Interactive Academic Eligibility Calculator</h3>
+            <p style="font-size: 0.75rem; color: #94a3b8;">Enter your SSC and HSC scores to immediately evaluate unit qualifications.</p>
+          </div>
+        </div>
+
+        <div class="calc-inputs">
+          <div class="calc-field">
+            <label>SSC Examination GPA (1.00 – 5.00)</label>
+            <input type="number" id="calcSscGpa" class="calc-input-elm" step="0.01" min="1.0" max="5.0" value="5.00" oninput="calculateEligibility()">
+          </div>
+          <div class="calc-field">
+            <label>HSC Examination GPA (1.00 – 5.00)</label>
+            <input type="number" id="calcHscGpa" class="calc-input-elm" step="0.01" min="1.0" max="5.0" value="4.85" oninput="calculateEligibility()">
+          </div>
+          <div class="calc-field">
+            <label>HSC Academic Group</label>
+            <select id="calcHscGroup" class="calc-input-elm" onchange="calculateEligibility()">
+              <option value="Science">Science</option>
+              <option value="Humanities">Humanities / Arts</option>
+              <option value="Business">Business Studies / Commerce</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Calculated Summary -->
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; background: rgba(255,255,255,0.08); padding: 1rem; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.15);">
+          <div>
+            <span style="font-size: 0.6875rem; color: #94a3b8; display: block;">Combined Total GPA:</span>
+            <strong id="calcTotalGpaDisplay" style="font-family: monospace; font-size: 1.25rem; color: #34d399;">9.85 / 10.00</strong>
+          </div>
+          <button class="btn-primary" onclick="navigateToSection('section-5')">Apply for Qualified Units →</button>
+        </div>
+
+        <!-- Evaluated Unit Badges -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; margin-top: 1.25rem;">
+          <div style="background: rgba(255,255,255,0.05); padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.1);">
+            <div style="display: flex; justify-content: space-between;">
+              <strong>Unit A (Engineering)</strong>
+              <span id="unit-a-badge" style="font-size: 0.6875rem; font-weight: 700; padding: 2px 6px; border-radius: 4px;">Evaluating...</span>
+            </div>
+            <span style="font-size: 0.6875rem; color: #94a3b8;">Min: SSC 4.0, HSC 4.0, Total 8.5 (Science)</span>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.05); padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.1);">
+            <div style="display: flex; justify-content: space-between;">
+              <strong>Unit B (Arts & Humanities)</strong>
+              <span id="unit-b-badge" style="font-size: 0.6875rem; font-weight: 700; padding: 2px 6px; border-radius: 4px;">Evaluating...</span>
+            </div>
+            <span style="font-size: 0.6875rem; color: #94a3b8;">Min: SSC 3.5, HSC 3.5, Total 7.5 (Any)</span>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.05); padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.1);">
+            <div style="display: flex; justify-content: space-between;">
+              <strong>Unit C (Business Studies)</strong>
+              <span id="unit-c-badge" style="font-size: 0.6875rem; font-weight: 700; padding: 2px 6px; border-radius: 4px;">Evaluating...</span>
+            </div>
+            <span style="font-size: 0.6875rem; color: #94a3b8;">Min: SSC 3.75, HSC 3.75, Total 8.0</span>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.05); padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.1);">
+            <div style="display: flex; justify-content: space-between;">
+              <strong>Unit D (Earth Sciences)</strong>
+              <span id="unit-d-badge" style="font-size: 0.6875rem; font-weight: 700; padding: 2px 6px; border-radius: 4px;">Evaluating...</span>
+            </div>
+            <span style="font-size: 0.6875rem; color: #94a3b8;">Min: SSC 3.75, HSC 3.75, Total 8.0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Document Specifications Table -->
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">Document Specifications</h3>
+        <div class="table-responsive">
+          <table class="aams-table">
+            <thead>
+              <tr>
+                <th>Document</th>
+                <th>Dimensions</th>
+                <th>Max Size</th>
+                <th>Format</th>
+                <th>Requirement</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Passport Photograph</strong></td>
+                <td>300 × 300 px</td>
+                <td>100 KB</td>
+                <td>JPG / PNG</td>
+                <td>Plain white/light background, front facing, neutral expression.</td>
+              </tr>
+              <tr>
+                <td><strong>Candidate Signature</strong></td>
+                <td>300 × 80 px</td>
+                <td>60 KB</td>
+                <td>JPG / PNG</td>
+                <td>Black ink on clean white unruled paper without shadow.</td>
+              </tr>
+              <tr>
+                <td><strong>HSC Transcript / Marks</strong></td>
+                <td>Letter / A4</td>
+                <td>500 KB</td>
+                <td>PDF</td>
+                <td>Authorized Board certified grade transcript.</td>
+              </tr>
+              <tr>
+                <td><strong>Quota Certificate</strong></td>
+                <td>Official Gazette</td>
+                <td>1 MB</td>
+                <td>PDF</td>
+                <td>Authorized Liberation War Ministry or DC seal.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION 5: APPLICATION FORM (4-STEP WIZARD)
+         ==================================================================== -->
+    <section id="section-5" class="spa-section">
+      <div class="card">
+        <span style="font-size: 0.6875rem; font-weight: 700; color: var(--secondary); text-transform: uppercase;">Registration Portal</span>
+        <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--text-main); margin-top: 0.25rem;">4-Step Online Admission Wizard</h2>
+        <p style="font-size: 0.8125rem; color: #64748b; margin-top: 0.25rem;">
+          Complete the four sequential steps to submit your application and generate your verified examination dossier.
+        </p>
+
+        <!-- Wizard Nav Stepper -->
+        <div class="wizard-nav" style="margin-top: 1.5rem;">
+          <button id="wiz-tab-1" class="wizard-step-btn active" onclick="setWizardStep(1)">
+            <strong>Step 1</strong>
+            <span style="display: block; font-size: 0.6875rem; color: #64748b;">Photo & AI Check</span>
+          </button>
+          <button id="wiz-tab-2" class="wizard-step-btn" onclick="setWizardStep(2)">
+            <strong>Step 2</strong>
+            <span style="display: block; font-size: 0.6875rem; color: #64748b;">Language & Units</span>
+          </button>
+          <button id="wiz-tab-3" class="wizard-step-btn" onclick="setWizardStep(3)">
+            <strong>Step 3</strong>
+            <span style="display: block; font-size: 0.6875rem; color: #64748b;">Quota Selection</span>
+          </button>
+          <button id="wiz-tab-4" class="wizard-step-btn" onclick="setWizardStep(4)">
+            <strong>Step 4</strong>
+            <span style="display: block; font-size: 0.6875rem; color: #64748b;">Board Match & Submit</span>
+          </button>
+        </div>
+
+        <!-- WIZARD STEP 1: PHOTO & AI SCREENING -->
+        <div id="wiz-step-1" class="wizard-step-content active">
+          <h3 style="font-size: 1rem; font-weight: 800; margin-bottom: 0.5rem;">Step 1: Passport Photo & Live Selfie Upload</h3>
+          <p style="font-size: 0.75rem; color: #64748b; margin-bottom: 1.5rem;">Our neural model inspects single human face orientation, lighting, and 300x300 aspect ratio.</p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+            <!-- Passport Photo -->
+            <div style="border: 1px dashed var(--border); padding: 1.25rem; border-radius: var(--radius-sm); text-align: center;">
+              <div style="width: 120px; height: 140px; margin: 0 auto 0.75rem auto; border: 2px solid #cbd5e1; border-radius: var(--radius-sm); overflow: hidden; background: #f8fafc;">
+                <img src="/src/assets/images/university_crest_emblem_1791455258427.jpg" alt="Photo" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+              <label class="btn-primary-sm" style="display: inline-block; cursor: pointer;">
+                Upload Passport Photo
+                <input type="file" accept="image/*" style="display: none;" onchange="alert('Photo uploaded. Running neural screening...')">
+              </label>
+            </div>
+
+            <!-- Live Selfie & AI Check -->
+            <div style="border: 1px dashed var(--border); padding: 1.25rem; border-radius: var(--radius-sm); text-align: center;">
+              <div style="width: 120px; height: 140px; margin: 0 auto 0.75rem auto; border: 2px solid #059669; border-radius: var(--radius-sm); overflow: hidden; background: #f8fafc; position: relative;">
+                <img src="/src/assets/images/university_crest_emblem_1791455258427.jpg" alt="Selfie" style="width: 100%; height: 100%; object-fit: cover;">
+                <span style="position: absolute; top: 4px; left: 4px; background: #059669; color: #fff; font-size: 8px; font-weight: 700; padding: 1px 4px; border-radius: 2px;">FACE_OK</span>
+              </div>
+              <button id="btnRunAiScan" class="btn-primary-sm" onclick="runAiPhotoCheck()">Run AI Face Check</button>
+            </div>
+          </div>
+
+          <!-- AI Status Indicator -->
+          <div class="ai-status-box">
+            <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 0.8125rem;">
+              <span id="aiVerificationBadge">Human Face Detected & Validated</span>
+              <span id="aiConfidenceScore" style="color: #059669;">98.7% Match Confidence</span>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; margin-top: 1.5rem;">
+            <button class="btn-primary" onclick="setWizardStep(2)">Proceed to Step 2 (Language & Units) →</button>
+          </div>
+        </div>
+
+        <!-- WIZARD STEP 2: LANGUAGE & PROGRAM SELECTION -->
+        <div id="wiz-step-2" class="wizard-step-content">
+          <h3 style="font-size: 1rem; font-weight: 800; margin-bottom: 0.5rem;">Step 2: Language Medium & Target Admission Units</h3>
+          <p style="font-size: 0.75rem; color: #64748b; margin-bottom: 1.5rem;">Select your exam language medium and choose eligible faculty units.</p>
+
+          <div class="form-group">
+            <label class="form-label">Examination Question Paper Medium</label>
+            <div style="display: flex; gap: 1rem;">
+              <label class="radio-card selected" style="flex: 1;">
+                <input type="radio" name="langMed" value="English" checked>
+                <div>
+                  <strong>English Version</strong>
+                  <span style="font-size: 0.6875rem; color: #64748b; display: block;">Standard English question paper</span>
+                </div>
+              </label>
+              <label class="radio-card" style="flex: 1;">
+                <input type="radio" name="langMed" value="Bengali">
+                <div>
+                  <strong>Bengali Version (বাংলা)</strong>
+                  <span style="font-size: 0.6875rem; color: #64748b; display: block;">Bangla translation medium</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Select Target Admission Units</label>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem;">
+              <label class="radio-card selected">
+                <input type="checkbox" checked>
+                <div>
+                  <strong>Unit A (Science & Engineering)</strong>
+                  <span style="font-size: 0.6875rem; color: #64748b; display: block;">1,250 Seats · Min GPA 8.50</span>
+                </div>
+              </label>
+              <label class="radio-card">
+                <input type="checkbox">
+                <div>
+                  <strong>Unit B (Arts & Humanities)</strong>
+                  <span style="font-size: 0.6875rem; color: #64748b; display: block;">850 Seats · Min GPA 7.50</span>
+                </div>
+              </label>
+              <label class="radio-card">
+                <input type="checkbox">
+                <div>
+                  <strong>Unit C (Business Studies)</strong>
+                  <span style="font-size: 0.6875rem; color: #64748b; display: block;">650 Seats · Min GPA 8.00</span>
+                </div>
+              </label>
+              <label class="radio-card selected">
+                <input type="checkbox" checked>
+                <div>
+                  <strong>Unit D (Interdisciplinary)</strong>
+                  <span style="font-size: 0.6875rem; color: #64748b; display: block;">500 Seats · Min GPA 8.00</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; margin-top: 1.5rem;">
+            <button class="btn-outline-white" style="background: #e2e8f0; color: #1e293b;" onclick="setWizardStep(1)">← Back to Step 1</button>
+            <button class="btn-primary" onclick="setWizardStep(3)">Proceed to Step 3 (Quota) →</button>
+          </div>
+        </div>
+
+        <!-- WIZARD STEP 3: QUOTA SELECTION -->
+        <div id="wiz-step-3" class="wizard-step-content">
+          <h3 style="font-size: 1rem; font-weight: 800; margin-bottom: 0.5rem;">Step 3: Quota Category Selection</h3>
+          <p style="font-size: 0.75rem; color: #64748b; margin-bottom: 1.5rem;">Select your applicable admission quota. False quota claims will lead to disqualification.</p>
+
+          <div class="form-group">
+            <label class="radio-card selected">
+              <input type="radio" name="quotaType" value="general" checked>
+              <div>
+                <strong>General Merit (No Quota)</strong>
+                <span style="font-size: 0.6875rem; color: #64748b; display: block;">Standard open merit admission seat allocation.</span>
+              </div>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="quotaType" value="freedom_fighter">
+              <div>
+                <strong>Freedom Fighter (FF) Quota</strong>
+                <span style="font-size: 0.6875rem; color: #64748b; display: block;">Children or grandchildren of authenticated Freedom Fighters.</span>
+              </div>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="quotaType" value="tribal">
+              <div>
+                <strong>Tribal / Ethnic Minority Quota</strong>
+                <span style="font-size: 0.6875rem; color: #64748b; display: block;">Candidates from ethnic hill tract and plain land tribal communities.</span>
+              </div>
+            </label>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; margin-top: 1.5rem;">
+            <button class="btn-outline-white" style="background: #e2e8f0; color: #1e293b;" onclick="setWizardStep(2)">← Back to Step 2</button>
+            <button class="btn-primary" onclick="setWizardStep(4)">Proceed to Step 4 (Board Match) →</button>
+          </div>
+        </div>
+
+        <!-- WIZARD STEP 4: BOARD MATCH & SUBMISSION -->
+        <div id="wiz-step-4" class="wizard-step-content">
+          <h3 style="font-size: 1rem; font-weight: 800; margin-bottom: 0.5rem;">Step 4: Academic Eligibility Auto-Check & Final Submission</h3>
+          <p style="font-size: 0.75rem; color: #64748b; margin-bottom: 1.5rem;">Verify your automatically retrieved Education Board records before final submission.</p>
+
+          <form onsubmit="handleWizardSubmit(event)">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+              <div class="form-group">
+                <label class="form-label">Applicant Name</label>
+                <input type="text" id="wizApplicantName" class="form-control" value="Sarah Rahman" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">HSC Roll (Dhaka Board)</label>
+                <input type="text" class="form-control" value="518423" readonly style="background: #f1f5f9;">
+              </div>
+              <div class="form-group">
+                <label class="form-label">HSC GPA (Auto-Verified)</label>
+                <input type="text" class="form-control" value="5.00" readonly style="background: #ecfdf5; color: #059669; font-weight: 700;">
+              </div>
+              <div class="form-group">
+                <label class="form-label">SSC GPA (Auto-Verified)</label>
+                <input type="text" class="form-control" value="5.00" readonly style="background: #ecfdf5; color: #059669; font-weight: 700;">
+              </div>
+            </div>
+
+            <!-- Statutory Undertaking -->
+            <div style="background: #f8fafc; border: 1px solid var(--border); padding: 1rem; border-radius: var(--radius-sm); margin-bottom: 1.5rem;">
+              <label style="display: flex; gap: 0.5rem; align-items: flex-start; cursor: pointer; font-size: 0.75rem; color: #334155;">
+                <input type="checkbox" id="wizDeclarationAgree" required style="margin-top: 2px;">
+                <span>I hereby declare that all information submitted is authentic. I understand that any false declaration or mismatched photograph will lead to immediate cancellation of candidature and legal action.</span>
+              </label>
+            </div>
+
+            <div style="display: flex; justify-content: space-between;">
+              <button type="button" class="btn-outline-white" style="background: #e2e8f0; color: #1e293b;" onclick="setWizardStep(3)">← Back to Step 3</button>
+              <button type="submit" class="btn-primary" style="background: var(--secondary);">Submit Final Application & Generate Roll →</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION 6: HELPLINE & QNA SECTION (ACCORDION FAQ & SUPPORT)
+         ==================================================================== -->
+    <section id="section-6" class="spa-section">
+      <div class="card">
+        <span style="font-size: 0.6875rem; font-weight: 700; color: var(--secondary); text-transform: uppercase;">Support Desk</span>
+        <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--text-main); margin-top: 0.25rem;">Admission Helpline & FAQ Center</h2>
+        <p style="font-size: 0.8125rem; color: #64748b; margin-top: 0.25rem;">
+          Get answers to common admission queries or lodge an inquiry with our central helpdesk.
+        </p>
+
+        <!-- Direct Support Channels -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+          <div style="background: #f8fafc; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+            <strong style="display: block; color: var(--primary);">📞 Telephone Hotline</strong>
+            <span style="font-family: monospace; font-size: 0.875rem; font-weight: 700;">+880 2-9876543</span>
+            <span style="display: block; font-size: 0.6875rem; color: #64748b;">Sunday – Thursday (9 AM – 5 PM)</span>
+          </div>
+
+          <div style="background: #f8fafc; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+            <strong style="display: block; color: var(--secondary);">✉️ Digital Ticket Support</strong>
+            <span style="font-family: monospace; font-size: 0.75rem;">admission@aams-portal.edu</span>
+            <button onclick="openSupportModal()" style="margin-top: 4px; background: none; border: none; color: var(--primary); font-size: 0.75rem; font-weight: 700; cursor: pointer; text-decoration: underline;">
+              Submit Support Query →
+            </button>
+          </div>
+
+          <div style="background: #f8fafc; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+            <strong style="display: block; color: #334155;">📍 Physical Admission Office</strong>
+            <span style="font-size: 0.75rem; color: #64748b;">Room 104, Registrar Building, Academic Campus Avenue</span>
+          </div>
+        </div>
+
+        <!-- Accordion FAQ -->
+        <h3 style="font-size: 1rem; font-weight: 800; color: #0f172a; margin-top: 2rem; margin-bottom: 0.75rem;">Frequently Asked Questions</h3>
+        <div>
+          <div class="accordion-item open">
+            <button class="accordion-header" onclick="toggleFaqAccordion(this)">
+              <span>How does AAMS automatically cross-validate my HSC credentials?</span>
+              <span>▼</span>
+            </button>
+            <div class="accordion-content">
+              AAMS connects securely to the National Education Board database using your SSC and HSC Roll, Registration Number, and Board name, retrieving subject letter grades and GPA instantaneously without manual transcript uploads.
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header" onclick="toggleFaqAccordion(this)">
+              <span>What if my photograph fails the AI verification screening?</span>
+              <span>▼</span>
+            </button>
+            <div class="accordion-content">
+              Ensure your photo has a plain white or light background, good frontal lighting, both ears visible, and no headwear or sunglasses. You can re-run the verification checker in Step 1 of the wizard.
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header" onclick="toggleFaqAccordion(this)">
+              <span>When does my digital Admit Card become available for download?</span>
+              <span>▼</span>
+            </button>
+            <div class="accordion-content">
+              Your Admit Card is instantly generated on your Student Dashboard as soon as your application is Accepted and registration fee is cleared. You can print it on standard A4 paper.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION 7: LOGIN & REGISTRATION SECTION (TABBED CONTAINER)
+         ==================================================================== -->
+    <section id="section-7" class="spa-section">
+      <div class="auth-container">
+        <div class="auth-tabs">
+          <button id="authTabLogin" class="auth-tab-btn active" onclick="switchAuthTab('login')">Applicant & Staff Login</button>
+          <button id="authTabReg" class="auth-tab-btn" onclick="switchAuthTab('register')">New Applicant Registration</button>
+        </div>
+
+        <div class="auth-body">
+          <!-- LOGIN FORM -->
+          <div id="authLoginForm">
+            <!-- 1-Click Demo Access Bar -->
+            <div style="background: #eff6ff; border: 1px solid #bfdbfe; padding: 0.75rem; border-radius: var(--radius-sm); margin-bottom: 1.25rem;">
+              <span style="font-size: 0.6875rem; font-weight: 700; color: #1e3a8a; text-transform: uppercase; display: block; margin-bottom: 0.35rem;">Quick Demo Shortcuts:</span>
+              <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                <button class="btn-primary-sm" style="background: #fff; color: #1e293b; border: 1px solid #cbd5e1;" onclick="quickDemoLogin('applicant')">
+                  👤 Log in as Applicant
+                </button>
+                <button class="btn-primary-sm" style="background: #fff; color: #1e293b; border: 1px solid #cbd5e1;" onclick="quickDemoLogin('admin')">
+                  🛡️ Log in as Admin Convenor
+                </button>
+              </div>
+            </div>
+
+            <form onsubmit="handleLoginSubmit(event)">
+              <div class="form-group">
+                <label class="form-label">Application ID / Mobile Number</label>
+                <input type="text" class="form-control" value="AAMS-2026-88412" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Password / PIN</label>
+                <input type="password" class="form-control" value="••••••••" required>
+              </div>
+              <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">Sign In to Dashboard</button>
+            </form>
+          </div>
+
+          <!-- REGISTRATION FORM -->
+          <div id="authRegisterForm" style="display: none;">
+            <form onsubmit="handleRegisterSubmit(event)">
+              <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" id="regName" class="form-control" placeholder="Sarah Rahman" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Contact Mobile</label>
+                <input type="tel" class="form-control" placeholder="+880 1712-345678" required>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                <div class="form-group">
+                  <label class="form-label">HSC Roll</label>
+                  <input type="text" class="form-control" placeholder="518423" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">HSC Board</label>
+                  <select class="form-control">
+                    <option>Dhaka</option>
+                    <option>Chittagong</option>
+                    <option>Rajshahi</option>
+                    <option>Comilla</option>
+                  </select>
+                </div>
+              </div>
+              <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; background: var(--secondary);">
+                Register & Initialize Account
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======================================================================
+       SECTION 8: FOOTER (STANDARD SITE FOOTER, QUICK LINKS, CONTACTS)
+       ====================================================================== -->
+  <footer id="section-8" class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+            <img src="/src/assets/images/university_crest_emblem_1791455258427.jpg" alt="AAMS" style="width: 28px; height: 28px; border-radius: 4px; background: #fff; padding: 1px;">
+            <strong style="color: #fff; font-size: 0.9375rem;">AAMS Portal</strong>
+          </div>
+          <p style="color: #94a3b8; line-height: 1.6; max-width: 320px;">
+            Central Automated Admission Management System providing paperless board cross-matching, AI facial verification, and digital admit cards.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><button onclick="navigateToSection('section-1')">Home</button></li>
+            <li><button onclick="navigateToSection('section-2')">Dashboard</button></li>
+            <li><button onclick="navigateToSection('section-3')">Notices</button></li>
+            <li><button onclick="navigateToSection('section-4')">Guidelines</button></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Admission Units</h4>
+          <ul>
+            <li>Unit A: Science & Engineering</li>
+            <li>Unit B: Arts & Humanities</li>
+            <li>Unit C: Business Studies</li>
+            <li>Unit D: Interdisciplinary</li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Emergency Desk</h4>
+          <ul>
+            <li>Hotline: +880 2-9876543</li>
+            <li>Email: admission@aams-portal.edu</li>
+            <li>Registrar Building, Room 104</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Central Admission Committee. All Rights Reserved.</span>
+        <span>AAMS v3.4-Automated Architecture</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================================================================
+       MODAL 1: PRINTABLE DIGITAL ADMIT CARD
+       ====================================================================== -->
+  <div id="admitCardModal" class="aams-modal-backdrop">
+    <div class="aams-modal-card">
+      <div class="modal-header">
+        <strong style="font-size: 0.875rem; color: #0f172a;">Official Digital Admit Card Preview</strong>
+        <button onclick="closeAdmitCardModal()" style="background: none; border: none; font-size: 1.25rem; cursor: pointer;">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Printable Admit Card Container -->
+        <div id="printable-admit-card" style="padding: 1.5rem; border: 2px solid #0f172a; border-radius: 6px; background: #fff; color: #0f172a;">
+          <div style="text-align: center; border-bottom: 2px solid #0f172a; padding-bottom: 0.75rem; margin-bottom: 1rem;">
+            <h2 style="font-size: 1.25rem; font-weight: 800; text-transform: uppercase;">Central Admission Examination 2026–2027</h2>
+            <p style="font-size: 0.75rem; font-weight: 600; color: #475569;">Automated Admission Management System (AAMS)</p>
+            <span style="display: inline-block; background: #0f172a; color: #fff; font-size: 0.6875rem; font-weight: 800; padding: 2px 10px; border-radius: 4px; margin-top: 4px;">
+              ADMIT CARD · PROVISIONAL
+            </span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 100px 1fr; gap: 1rem; align-items: start;">
+            <div style="text-align: center;">
+              <div style="width: 100px; height: 115px; border: 1px solid #0f172a; overflow: hidden; background: #f8fafc;">
+                <img src="/src/assets/images/university_crest_emblem_1791455258427.jpg" alt="Candidate" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+              <span style="display: block; font-size: 8px; font-weight: 700; color: #059669; margin-top: 2px;">AI VERIFIED</span>
+            </div>
+
+            <div style="font-size: 0.75rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+              <div>
+                <span style="color: #64748b; display: block; font-size: 0.6875rem;">Candidate Name:</span>
+                <strong style="font-size: 0.875rem;">Sarah Rahman</strong>
+              </div>
+              <div>
+                <span style="color: #64748b; display: block; font-size: 0.6875rem;">Exam Roll Number:</span>
+                <strong style="font-family: monospace; font-size: 0.875rem;">A-26-88412</strong>
+              </div>
+              <div>
+                <span style="color: #64748b; display: block; font-size: 0.6875rem;">HSC Roll / Board:</span>
+                <span style="font-family: monospace;">518423 (Dhaka Board)</span>
+              </div>
+              <div>
+                <span style="color: #64748b; display: block; font-size: 0.6875rem;">Applied Units:</span>
+                <strong>Unit A (Science & Engineering)</strong>
+              </div>
+              <div style="grid-column: 1/-1; background: #f8fafc; padding: 0.5rem; border-radius: 4px; border: 1px solid #e2e8f0;">
+                <strong style="color: #1e3a8a;">Exam Venue:</strong> Faculty of Engineering, Building 3, Room 402<br>
+                <strong style="color: #1e3a8a;">Date & Time:</strong> November 28, 2026 | 10:00 AM - 11:30 AM
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 1rem; padding-top: 0.5rem; border-top: 1px solid #cbd5e1; font-size: 0.625rem; color: #475569;">
+            <strong>Instructions:</strong> Bring this printed admit card and original HSC registration card. Report 30 mins before exam. Black ballpoint pen only.
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-outline-white" style="background: #e2e8f0; color: #1e293b;" onclick="closeAdmitCardModal()">Close</button>
+        <button class="btn-primary" onclick="printAdmitCard()">Print Admit Card</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       MODAL 2: NOTICE READER MODAL
+       ====================================================================== -->
+  <div id="noticeReaderModal" class="aams-modal-backdrop">
+    <div class="aams-modal-card">
+      <div class="modal-header">
+        <span id="modalNoticeCategory" class="role-badge" style="background: #eff6ff; color: #1e3a8a;">Notice</span>
+        <button onclick="closeNoticeModal()" style="background: none; border: none; font-size: 1.25rem; cursor: pointer;">✕</button>
+      </div>
+      <div class="modal-body">
+        <h3 id="modalNoticeTitle" style="font-size: 1.125rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;"></h3>
+        <p id="modalNoticeDate" style="font-size: 0.6875rem; color: #94a3b8; margin-bottom: 1rem;"></p>
+        <div id="modalNoticeBody" style="font-size: 0.8125rem; line-height: 1.6; color: #334155; background: #f8fafc; padding: 1rem; border-radius: var(--radius-sm);"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-primary" onclick="closeNoticeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       MODAL 3: SUPPORT QUERY TICKET MODAL
+       ====================================================================== -->
+  <div id="supportModal" class="aams-modal-backdrop">
+    <div class="aams-modal-card" style="max-width: 500px;">
+      <div class="modal-header">
+        <strong style="font-size: 0.875rem;">Lodge Support Query to Helpdesk</strong>
+        <button onclick="closeSupportModal()" style="background: none; border: none; font-size: 1.25rem; cursor: pointer;">✕</button>
+      </div>
+      <form onsubmit="handleSupportSubmit(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Applicant Name</label>
+            <input type="text" class="form-control" placeholder="Sarah Rahman" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Inquiry Topic</label>
+            <select class="form-control">
+              <option>Payment & Fee Clearance</option>
+              <option>AI Photo Verification</option>
+              <option>Admit Card Generation</option>
+              <option>Board Record Mismatch</option>
+              <option>General Admission Policy</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Details of Issue</label>
+            <textarea class="form-control" rows="3" required placeholder="Describe your question or issue..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-outline-white" style="background: #e2e8f0; color: #1e293b;" onclick="closeSupportModal()">Cancel</button>
+          <button type="submit" class="btn-primary">Submit Ticket</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/script.js"></script>
 </body>
 </html>
